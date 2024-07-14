@@ -1,0 +1,7 @@
+Messages:
+  Warnings:
+    JoinedQueue: "&eYou joined the queue"
+    LeftQueue: "&eYou left the queue"
+  Errors:
+    AlreadyInQueue: "&cYou are already in the queue"
+    NotInQueue: "&cYou are not in the queue"
