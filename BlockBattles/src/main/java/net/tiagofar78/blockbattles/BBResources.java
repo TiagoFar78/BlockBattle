@@ -41,5 +41,14 @@ public class BBResources {
         String parent = BlockBattles.getPrisonEscape().getDataFolder() + File.separator + "languages";
         return new File(parent, language + ".yml");
     }
+
+//  ########################################
+//  #              Schematics              #
+//  ########################################
+
+    public static File schematicFile(String name) {
+        String parent = BlockBattles.getPrisonEscape().getDataFolder() + File.separator + "schematics";
+        return new File(parent, name + ".schem");
+    }    
     
 }

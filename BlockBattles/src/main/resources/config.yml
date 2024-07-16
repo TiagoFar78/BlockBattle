@@ -1,3 +1,23 @@
+MaxSimultaneousGames: 30
 DefaultLanguage: "english"
 AvailableLanguages:
 - "english"
+WorldName: "BlockBattlesWorld"
+Locations:
+  Reference:
+    X: 0
+    Y: 0
+    Z: 0
+  Player1SpawnPoint:
+    X: 0
+    Y: 0
+    Z: 0
+  Player2SpawnPoint:
+    X: 0
+    Y: 0
+    Z: 0
+  Exit:
+    World: "world"
+    X: 0
+    Y: 0
+    Z: 0

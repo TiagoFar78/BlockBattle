@@ -9,6 +9,7 @@ import net.tiagofar78.blockbattles.commands.LeaveQueueCommand;
 import net.tiagofar78.blockbattles.commands.QueueCommand;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
 import net.tiagofar78.blockbattles.managers.MessagesManager;
+import net.tiagofar78.blockbattles.managers.SchematicsManager;
 
 public class BlockBattles extends JavaPlugin {
     
@@ -31,6 +32,7 @@ public class BlockBattles extends JavaPlugin {
     private void loadResourcesAndManagers() {
         ConfigManager.load();
         MessagesManager.load();
+        SchematicsManager.load();
     }
 
 }
