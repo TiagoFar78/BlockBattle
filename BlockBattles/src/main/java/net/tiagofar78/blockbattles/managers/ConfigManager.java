@@ -23,6 +23,8 @@ public class ConfigManager {
     }
     
     private int _maxGames;
+    private int _turnSeconds;
+    
     private String _defaultLanguage;
     private List<String> _availableLanguages;
     
@@ -36,6 +38,8 @@ public class ConfigManager {
         YamlConfiguration config = BBResources.getYamlConfiguration();
         
         _maxGames = config.getInt("MaxSimultaneousGames");
+        _turnSeconds = config.getInt("TurnSeconds");
+        
         _defaultLanguage = config.getString("DefaultLanguage");
         _availableLanguages = config.getStringList("AvailableLanguages");
         
@@ -59,6 +63,10 @@ public class ConfigManager {
     
     public int getMaxGames() {
         return _maxGames;
+    }
+    
+    public int getTurnSeconds() {
+        return _turnSeconds;
     }
     
     public String getDefaultLanguage() {

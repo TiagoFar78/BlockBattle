@@ -25,7 +25,7 @@ public class BlockBattles extends JavaPlugin {
         loadResourcesAndManagers();
     }
 
-    public static BlockBattles getPrisonEscape() {
+    public static BlockBattles getBlockBattles() {
         return (BlockBattles) Bukkit.getServer().getPluginManager().getPlugin("TF_BlockBattles");
     }
 

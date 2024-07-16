@@ -16,7 +16,7 @@ public class BBResources {
     }
 
     private static File configFile() {
-        return new File(BlockBattles.getPrisonEscape().getDataFolder(), "config.yml");
+        return new File(BlockBattles.getBlockBattles().getDataFolder(), "config.yml");
     }
 
     public static void saveConfig(YamlConfiguration config) {
@@ -38,7 +38,7 @@ public class BBResources {
     }
 
     private static File languageFile(String language) {
-        String parent = BlockBattles.getPrisonEscape().getDataFolder() + File.separator + "languages";
+        String parent = BlockBattles.getBlockBattles().getDataFolder() + File.separator + "languages";
         return new File(parent, language + ".yml");
     }
 
@@ -47,7 +47,7 @@ public class BBResources {
 //  ########################################
 
     public static File schematicFile(String name) {
-        String parent = BlockBattles.getPrisonEscape().getDataFolder() + File.separator + "schematics";
+        String parent = BlockBattles.getBlockBattles().getDataFolder() + File.separator + "schematics";
         return new File(parent, name + ".schem");
     }    
     

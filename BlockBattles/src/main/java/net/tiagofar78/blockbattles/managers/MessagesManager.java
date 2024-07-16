@@ -61,6 +61,9 @@ public class MessagesManager {
     
     private String _joinedQueueMessage;
     private String _leftQueueMessage;
+    private String _lostTurnOwnMessage;
+    private String _lostTurnOtherMessage;
+    private String _turnDurationMessage;
 
 //  ########################################
 //  #                Errors                #
@@ -75,6 +78,9 @@ public class MessagesManager {
         String warningPath = "Messages.Warnings.";
         _joinedQueueMessage = createMessage(messages.getString(warningPath + "JoinedQueue"));
         _leftQueueMessage = createMessage(messages.getString(warningPath + "LeftQueue"));
+        _lostTurnOwnMessage = createMessage(messages.getString(warningPath + "LostTurnOwn"));
+        _lostTurnOtherMessage = createMessage(messages.getString(warningPath + "LostTurnOther"));
+        _turnDurationMessage = createMessage(messages.getString(warningPath + "TurnDuration"));
         
         String errorPath = "Messages.Errors.";
         _alreadyInQueueMessage = createMessage(messages.getString(errorPath + "AlreadyInQueue"));
@@ -95,6 +101,18 @@ public class MessagesManager {
     
     public String getLeftQueueMessage() {
         return _leftQueueMessage;
+    }
+    
+    public String getLostTurnOwnMessage() {
+        return _lostTurnOwnMessage;
+    }
+    
+    public String getLostTurnOtherMessage(String playerName) {
+        return _lostTurnOtherMessage.replace("{PLAYER}", playerName);
+    }
+    
+    public String getTurnDurationMessage(String playerName, int seconds) {
+        return _turnDurationMessage.replace("{PLAYER}", playerName).replace("{SECONDS}", Integer.toString(seconds));
     }
 
 //  ########################################

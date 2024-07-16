@@ -1,4 +1,5 @@
 MaxSimultaneousGames: 30
+TurnSeconds: 15
 DefaultLanguage: "english"
 AvailableLanguages:
 - "english"
