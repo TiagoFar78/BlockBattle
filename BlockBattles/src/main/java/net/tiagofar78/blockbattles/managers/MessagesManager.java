@@ -56,6 +56,14 @@ public class MessagesManager {
     }
 
 //  ########################################
+//  #              Scoreboard              #
+//  ########################################
+    
+    private String _scoreboardTitle;
+    private String _playerHealthLine;
+    private String _serverShopLine;
+
+//  ########################################
 //  #               Warnings               #
 //  ########################################
     
@@ -75,6 +83,11 @@ public class MessagesManager {
     private MessagesManager(String language) {
         YamlConfiguration messages = BBResources.getYamlLanguage(language);
         
+        String scoreboardPath = "Scoreboard.";
+        _scoreboardTitle = createMessage(messages.getString(scoreboardPath + "Title"));
+        _playerHealthLine = createMessage(messages.getString(scoreboardPath + "SideBar.HealthLine"));
+        _serverShopLine = createMessage(messages.getString(scoreboardPath + "SideBar.ShopLine"));
+        
         String warningPath = "Messages.Warnings.";
         _joinedQueueMessage = createMessage(messages.getString(warningPath + "JoinedQueue"));
         _leftQueueMessage = createMessage(messages.getString(warningPath + "LeftQueue"));
@@ -89,6 +102,24 @@ public class MessagesManager {
 
     private String createMessage(String rawMessage) {
         return rawMessage.replace("&", "§");
+    }
+
+//  ########################################
+//  #              Scoreboard              #
+//  ########################################
+    
+    public String getScoreboardTitle() {
+        return _scoreboardTitle;
+    }
+    
+    public String getPlayerHealthLine(String playerName, String color, double health) {
+        double roundedHealth = Math.round(health * (double) 100) / (double) 100;
+        String sHealth = Double.toString(roundedHealth);
+        return _playerHealthLine.replace("{PLAYER}", playerName).replace("{COLOR}", color).replace("{HEALTH}", sHealth);
+    }
+    
+    public String getServerShopLine() {
+        return _serverShopLine;
     }
 
 //  ########################################

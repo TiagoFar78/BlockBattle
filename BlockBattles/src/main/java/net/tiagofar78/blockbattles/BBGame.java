@@ -28,8 +28,8 @@ public class BBGame {
     public BBGame(int index, Location referenceLocation, Player player1, Player player2) {
         _index = index;
         _referenceLoc = referenceLocation;
-        _player1 = new BBPlayer(player1);
-        _player2 = new BBPlayer(player2);
+        _player1 = new BBPlayer(player1, this);
+        _player2 = new BBPlayer(player2, this);
         
         generateMap();
         
@@ -89,6 +89,9 @@ public class BBGame {
     public void applyTurnResult(BBPlayer player1, double damage1, BBPlayer player2, double damage2) {
         player1.updateHealth(damage1);
         player2.updateHealth(damage2);
+        
+        _player1.updateScoreboardHealthLines(this);
+        _player2.updateScoreboardHealthLines(this);
         
         if (_player1.getHealth() <= 0) {
             startNextPhase();

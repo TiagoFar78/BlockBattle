@@ -15,6 +15,9 @@ public class TurnsPhase extends Phase {
     public void start(BBGame game) {
         game.setIsPlayer1Turn(new Random().nextBoolean());
         game.changeTurn();
+        
+        game.getPlayer1().setScoreboardData(game);
+        game.getPlayer2().setScoreboardData(game);
     }
 
 }

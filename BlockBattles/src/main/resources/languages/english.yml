@@ -1,3 +1,8 @@
+Scoreboard:
+  Title: "&l&6Block Battles"
+  SideBar:
+    HealthLine: "&f{PLAYER}: {COLOR}{HEALTH}"
+    ShopLine: "&eblockbattles.com"
 Messages:
   Warnings:
     JoinedQueue: "&eYou joined the queue"
