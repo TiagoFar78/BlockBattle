@@ -1,5 +1,7 @@
 package net.tiagofar78.blockbattles.managers;
 
+import java.util.List;
+
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -22,12 +24,21 @@ public class GamesManager {
                 
                 Location referenceLocation = config.getReferenceLocation().add(i * GAMES_DISTANCE, 0, 0);
                 
-                games[i] = new BBGame(referenceLocation, player1, player2);
+                games[i] = new BBGame(i, referenceLocation, player1, player2);
                 return 0;
             }
         }
         
         return -1;
+    }
+    
+    public static void removeGame(int index) {
+        games[index] = null;
+        
+        List<Player> sparePlayers = QueueManager.getSparePlayers();
+        if (sparePlayers != null) {
+            startGame(sparePlayers.get(0), sparePlayers.get(1));
+        }
     }
 
 }

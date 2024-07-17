@@ -38,6 +38,21 @@ public class QueueManager {
         return 0;
     }
     
+    public static List<Player> getSparePlayers() {
+        List<Player> sparePlayers = new ArrayList<>();
+        if (queue.size() < 2) {
+            return null;
+        }
+        
+        sparePlayers.add(queue.get(0));
+        sparePlayers.add(queue.get(1));
+        
+        queue.remove(0);
+        queue.remove(0);
+        
+        return sparePlayers;
+    }
+    
     private static void sendSignalToGamesManager() {
         if (queue.size() != 2) {
             return;
