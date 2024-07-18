@@ -25,6 +25,7 @@ public class ConfigManager {
     private int _maxGames;
     private int _turnSeconds;
     private int _startingHealth;
+    private int _startingHandSize;
     
     private String _defaultLanguage;
     private List<String> _availableLanguages;
@@ -41,6 +42,7 @@ public class ConfigManager {
         _maxGames = config.getInt("MaxSimultaneousGames");
         _turnSeconds = config.getInt("TurnSeconds");
         _startingHealth = config.getInt("StartingHealth");
+        _startingHandSize = config.getInt("StartingHandSize");
         
         _defaultLanguage = config.getString("DefaultLanguage");
         _availableLanguages = config.getStringList("AvailableLanguages");
@@ -73,6 +75,10 @@ public class ConfigManager {
     
     public int getStartingHealth() {
         return _startingHealth;
+    }
+    
+    public int getStartingHandSize() {
+        return _startingHandSize;
     }
     
     public String getDefaultLanguage() {

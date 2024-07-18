@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.tiagofar78.blockbattles.block.Block;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
 import net.tiagofar78.blockbattles.managers.MessagesManager;
 import net.tiagofar78.blockbattles.managers.SchematicsManager;
@@ -34,8 +35,8 @@ public class BBGame {
         generateMap();
         
         ConfigManager config = ConfigManager.getInstance();
-        _player1.resetPlayer(config.getPlayer1SpawnPoint().add(referenceLocation));
-        _player2.resetPlayer(config.getPlayer2SpawnPoint().add(referenceLocation));
+        addPlayer(_player1, config.getPlayer1SpawnPoint().add(referenceLocation));
+        addPlayer(_player2, config.getPlayer2SpawnPoint().add(referenceLocation));
         
         startNextPhase(new TurnsPhase());
     }
@@ -64,6 +65,12 @@ public class BBGame {
 //  #                 Lobby                 #
 //  #########################################
     
+    public void addPlayer(BBPlayer player, Location spawnPoint) {
+        player.reset();
+        player.getBukkitPlayer().teleport(spawnPoint);
+        player.updateInventory();
+    }
+    
     public void removePlayer(BBPlayer player) {
         Location exitLocation = ConfigManager.getInstance().getExitLocation();
         player.getBukkitPlayer().teleport(exitLocation);
@@ -85,6 +92,22 @@ public class BBGame {
 //  ########################################
 //  #                 Turn                 #
 //  ########################################
+    
+    public void playerPlacedBlock(BBPlayer player, int slot, Location location) {
+        Block block = player.getItemAt(slot);
+        if (block == null) {
+            return;
+        }
+        
+        if (!isPlayerTurn(player)) {
+            // TODO send message
+            return;
+        }
+        
+        // TODO block placed at location
+        
+        player.usedItemAt(slot);
+    }
     
     public void applyTurnResult(BBPlayer player1, double damage1, BBPlayer player2, double damage2) {
         player1.updateHealth(damage1);

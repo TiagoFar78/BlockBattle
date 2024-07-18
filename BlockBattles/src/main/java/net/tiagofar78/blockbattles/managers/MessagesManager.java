@@ -1,5 +1,6 @@
 package net.tiagofar78.blockbattles.managers;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -79,6 +80,13 @@ public class MessagesManager {
     
     private String _alreadyInQueueMessage;
     private String _notInQueueMessage;
+
+//  #######################################
+//  #                Items                #
+//  #######################################
+
+    private Hashtable<String, String> _itemsNames;
+    private Hashtable<String, List<String>> _itemsLores;
     
     private MessagesManager(String language) {
         YamlConfiguration messages = BBResources.getYamlLanguage(language);
@@ -98,10 +106,38 @@ public class MessagesManager {
         String errorPath = "Messages.Errors.";
         _alreadyInQueueMessage = createMessage(messages.getString(errorPath + "AlreadyInQueue"));
         _notInQueueMessage = createMessage(messages.getString(errorPath + "NotInQueue"));
+
+        _itemsNames = new Hashtable<>();
+        _itemsLores = new Hashtable<>();
+
+        String itemsPath = "Items";
+        for (String itemConfigName : getItemsConfigNames(messages, itemsPath)) {
+            String itemPath = itemsPath + "." + itemConfigName + ".";
+
+            String itemName = messages.getString(itemPath + "Name");
+            if (itemName != null) {
+                _itemsNames.put(itemConfigName, createMessage(itemName));
+            }
+
+            List<String> itemLore = messages.getStringList(itemPath + "Lore");
+            if (itemLore != null) {
+                _itemsLores.put(itemConfigName, createMessage(itemLore));
+            }
+        }
     }
 
     private String createMessage(String rawMessage) {
         return rawMessage.replace("&", "§");
+    }
+
+    private List<String> createMessage(List<String> rawMessage) {
+        List<String> message = new ArrayList<>(rawMessage);
+
+        for (int i = 0; i < message.size(); i++) {
+            message.set(i, createMessage(message.get(i)));
+        }
+
+        return message;
     }
 
 //  ########################################
@@ -156,6 +192,25 @@ public class MessagesManager {
     
     public String getNotInQueueMessage() {
         return _notInQueueMessage;
+    }
+
+//  #######################################
+//  #                Items                #
+//  #######################################
+
+    private List<String> getItemsConfigNames(YamlConfiguration messages, String itemsPath) {
+        return messages.getConfigurationSection(itemsPath).getKeys(true).stream().filter(
+                key -> !key.contains(".")
+        ).toList();
+    }
+
+    public String getItemName(String configName) {
+        return _itemsNames.get(configName);
+    }
+
+    public List<String> getItemLore(String configName) {
+        List<String> lore = _itemsLores.get(configName);        
+        return lore == null ? null : new ArrayList<>(lore);
     }
 
 }

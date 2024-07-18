@@ -2,13 +2,16 @@ package net.tiagofar78.blockbattles;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import net.tiagofar78.blockbattles.block.Block;
+import net.tiagofar78.blockbattles.block.ChestBlock;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
 import net.tiagofar78.blockbattles.managers.MessagesManager;
 
@@ -17,16 +20,23 @@ public class BBPlayer {
     private final static int BUKKIT_MAX_HEALTH = 20;
     private final static int SCOREBOARD_HEALTH_LINE_1 = 1;
     private final static int SCOREBOARD_HEALTH_LINE_2 = 2;
+    private final static int INVENTORY_STARTING_SLOT = 0;
     
     private Player _player;
     private double _health;
     private ScoreboardData _sbData;
+    private List<Block> _hand;
+    
+    private List<Block> _deck;
     
     public BBPlayer(Player player, BBGame game) {
         ConfigManager config = ConfigManager.getInstance();
         
         _player = player;
         _health = config.getStartingHealth();
+        
+        _deck = createDummyDeck(); // TODO in the future, right now this is just for testing
+        _hand = initializeHand();
     }
     
     public Player getBukkitPlayer() {
@@ -47,19 +57,71 @@ public class BBPlayer {
         _player.setHealth(_health * BUKKIT_MAX_HEALTH / maxBBPlayerHealth);
     }
     
-    public void resetPlayer(Location spawnPoint) {
+    public void reset() {
         PlayerInventory inv = _player.getInventory();
         inv.clear();
         inv.setArmorContents(new ItemStack[4]);
         inv.setItemInOffHand(null);
         
         _player.setGameMode(GameMode.SURVIVAL);
-        _player.teleport(spawnPoint);   
     }
     
     @Override
     public boolean equals(Object o) {
         return ((BBPlayer) o).getBukkitPlayer().getName().equals(_player.getName());
+    }
+
+//  #########################################
+//  #               Inventory               #
+//  #########################################
+    
+    private List<Block> initializeHand() {
+        int handSize = ConfigManager.getInstance().getStartingHandSize();
+        int n = _deck.size();
+        Random random = new Random();
+        
+        List<Block> inventory = new ArrayList<>();
+        for (int i = 0; i < handSize; i++) {
+            inventory.add(_deck.get(random.nextInt(n)));
+        }
+        
+        return inventory;
+    }
+    
+    public void usedItemAt(int slot) {
+        int invIndex = toHandIndex(slot);
+        
+        int randomIndex = new Random().nextInt(_deck.size());
+        Block randomBlock = _deck.get(randomIndex);
+        
+        _hand.set(invIndex, randomBlock);
+        updateInventory();
+    }
+    
+    public Block getItemAt(int slot) {
+        int invIndex = toHandIndex(slot);
+        if (invIndex == -1) {
+            return null;
+        }
+        
+        return _hand.get(invIndex);
+    }
+    
+    private int toHandIndex(int slot) {
+        int index = slot - INVENTORY_STARTING_SLOT;
+        if (index < 0 || index >= _hand.size()) {
+            return -1;
+        }
+        
+        return index;
+    }
+    
+    public void updateInventory() {
+        MessagesManager messages = MessagesManager.getInstanceByPlayer(_player.getName());
+        Inventory playerInv = _player.getInventory();
+        for (int i = 0; i < _hand.size(); i++) {
+            playerInv.setItem(INVENTORY_STARTING_SLOT + i, _hand.get(i).toItemStack(messages));
+        }
     }
 
 //  ########################################
@@ -118,6 +180,21 @@ public class BBPlayer {
         
         _sbData.updateLine(SCOREBOARD_HEALTH_LINE_1, buildHealthLine(messages, game.getPlayer1()));
         _sbData.updateLine(SCOREBOARD_HEALTH_LINE_2, buildHealthLine(messages, game.getPlayer2()));
+    }
+    
+    private List<Block> createDummyDeck() {
+        List<Block> deck = new ArrayList<>();
+        
+        deck.add(new ChestBlock());
+        deck.add(new ChestBlock());
+        deck.add(new ChestBlock());
+        deck.add(new ChestBlock());
+        deck.add(new ChestBlock());
+        deck.add(new ChestBlock());
+        deck.add(new ChestBlock());
+        deck.add(new ChestBlock());
+        
+        return deck;
     }
 
 }

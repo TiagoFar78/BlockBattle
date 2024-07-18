@@ -13,3 +13,9 @@ Messages:
   Errors:
     AlreadyInQueue: "&cYou are already in the queue"
     NotInQueue: "&cYou are not in the queue"
+Items:
+  Chest:
+    Lore:
+    - "" 
+    - "Deals 5 damage to enemy"
+    - ""
