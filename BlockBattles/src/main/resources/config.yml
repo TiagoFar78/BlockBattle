@@ -31,3 +31,7 @@ Locations:
 Items:
   Chest:
     Damage: 5
+  OakDoor:
+    Damage: 4
+    MaxInteractions: 3
+    SecondsToInteract: 1

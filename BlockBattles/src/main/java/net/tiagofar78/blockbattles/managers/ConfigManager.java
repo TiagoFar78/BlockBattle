@@ -38,6 +38,9 @@ public class ConfigManager {
     private Location _exitLocation;
     
     private double _chestDamage;
+    private double _oakDoorDamage;
+    private int _oakDoorMaxInteractions;
+    private int _oakDoorSecondsToInteract;
     
     private ConfigManager() {
         YamlConfiguration config = BBResources.getYamlConfiguration();
@@ -62,6 +65,9 @@ public class ConfigManager {
         
         String itemsPath = "Items.";
         _chestDamage = config.getDouble(itemsPath + "Chest.Damage");
+        _oakDoorDamage = config.getDouble(itemsPath + "OakDoor.Damage");
+        _oakDoorMaxInteractions = config.getInt(itemsPath + "OakDoor.MaxInteractions");
+        _oakDoorSecondsToInteract = config.getInt(itemsPath + "OakDoor.SecondsToInteract");
     }
     
     private Location createLocation(World world, YamlConfiguration config, String path) {
@@ -122,6 +128,18 @@ public class ConfigManager {
     
     public double getChestDamage() {
         return _chestDamage;
+    }
+    
+    public double getOakDoorDamage() {
+        return _oakDoorDamage;
+    }
+    
+    public int getOakDoorMaxInteractions() {
+        return _oakDoorMaxInteractions;
+    }
+    
+    public int getOakDoorSecondsToInteract() {
+        return _oakDoorSecondsToInteract;
     }
 
 //  ########################################

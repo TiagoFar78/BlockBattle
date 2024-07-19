@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.tiagofar78.blockbattles.block.Block;
+import net.tiagofar78.blockbattles.block.Interactable;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
 import net.tiagofar78.blockbattles.managers.MessagesManager;
 import net.tiagofar78.blockbattles.managers.SchematicsManager;
@@ -20,6 +21,8 @@ public class BBGame {
     private Location _referenceLoc;
     private boolean _isPlayer1Turn;
     private int _turnId = 0;
+    private int _subTurnId = 0;
+    private int _turnTimer;
     
     private Board _board;
     private BBPlayer _player1;
@@ -61,6 +64,10 @@ public class BBGame {
     
     public BBPlayer getPlayer2() {
         return _player2;
+    }
+    
+    public Board getBoard() {
+        return _board;
     }
     
     private void adapLocation(Location location) {
@@ -108,7 +115,7 @@ public class BBGame {
     }
 
 //  ########################################
-//  #                 Turn                 #
+//  #                 Play                 #
 //  ########################################
     
     /**
@@ -131,16 +138,43 @@ public class BBGame {
         }
         
         BBPlayer otherPlayer = _isPlayer1Turn ? _player2 : _player1;
-        block.executePlacement(_board, player, otherPlayer);
+        block.executePlacement(this, player, otherPlayer, location);
         
         _board.setBlock(location, block);
         player.usedItemAt(slot);
-        changeTurn();
-        visuallyApplyTurnResult();
+        
+        visuallyApplyResult();
         return false;
     }
     
-    private void visuallyApplyTurnResult() {        
+    /**
+     * 
+     * @return if the interaction should be cancelled
+     */
+    public boolean playerInteractedWithBlock(BBPlayer player, Location location) {
+        adapLocation(location);
+        
+        Block block = _board.getBlock(location);
+        if (block == null) {
+            return false;
+        }
+        
+        if (!(block instanceof Interactable)) {
+            return true;
+        }
+        
+        if (!isPlayerTurn(player)) {
+            return true;
+        }
+        
+        BBPlayer otherPlayer = _isPlayer1Turn ? _player2 : _player1;
+        boolean isCancelled = ((Interactable) block).interact(this, player, otherPlayer, location);
+        visuallyApplyResult();
+        
+        return isCancelled;        
+    }
+    
+    private void visuallyApplyResult() {        
         _player1.updateScoreboardHealthLines(this);
         _player2.updateScoreboardHealthLines(this);
         
@@ -151,6 +185,18 @@ public class BBGame {
             startNextPhase();
         }
     }
+
+//  ########################################
+//  #                 Turn                 #
+//  ########################################
+    
+    public int getTurnTimer() {
+        return _turnTimer;
+    }
+    
+    public int getTurnId() {
+        return _turnId;
+    }
     
     public boolean isPlayerTurn(BBPlayer player) {
         return _isPlayer1Turn == player.equals(_player1);
@@ -160,24 +206,29 @@ public class BBGame {
         _isPlayer1Turn = !_isPlayer1Turn;
         
         BBPlayer player = _isPlayer1Turn ? _player1 : _player2;
-        int turnSeconds = ConfigManager.getInstance().getTurnSeconds();
+        _turnTimer = ConfigManager.getInstance().getTurnSeconds();
         _turnId++;
+        _subTurnId = 0;
         
-        runTurnTimer(player.getBukkitPlayer().getName(), turnSeconds, _turnId);
+        runTurnTimer(player.getBukkitPlayer().getName(), _turnId, _subTurnId);
     }
     
-    private void runTurnTimer(String playerName, int secondsLeft, int id) {
-        if (_turnId != id) {
-            return;
-        }
+    public void setTurnTimer(int turnTimer) {
+        BBPlayer player = _isPlayer1Turn ? _player1 : _player2;
+        _turnTimer = turnTimer;
+        _subTurnId++;
         
+        runTurnTimer(player.getBukkitPlayer().getName(), _turnId, _subTurnId);
+    }
+    
+    private void runTurnTimer(String playerName, int id, int subId) {
         Player bukkitPlayer1 = _player1.getBukkitPlayer();
         Player bukkitPlayer2 = _player2.getBukkitPlayer();
         
         MessagesManager messages1 = MessagesManager.getInstanceByPlayer(bukkitPlayer1.getName());
         MessagesManager messages2 = MessagesManager.getInstanceByPlayer(bukkitPlayer2.getName());
         
-        if (secondsLeft == 0) {
+        if (_turnTimer == 0) {
             if (isPlayerTurn(_player1)) {
                 bukkitPlayer1.sendMessage(messages1.getLostTurnOwnMessage());
                 bukkitPlayer2.sendMessage(messages2.getLostTurnOtherMessage(playerName));
@@ -190,14 +241,17 @@ public class BBGame {
             return;
         }
         
-        sendActionBarMessage(bukkitPlayer1, messages1.getTurnDurationMessage(playerName, secondsLeft));
-        sendActionBarMessage(bukkitPlayer2, messages2.getTurnDurationMessage(playerName, secondsLeft));
+        sendActionBarMessage(bukkitPlayer1, messages1.getTurnDurationMessage(playerName, _turnTimer));
+        sendActionBarMessage(bukkitPlayer2, messages2.getTurnDurationMessage(playerName, _turnTimer));
         
         Bukkit.getScheduler().runTaskLater(BlockBattles.getBlockBattles(), new Runnable() {
             
             @Override
             public void run() {
-                runTurnTimer(playerName, secondsLeft - 1, id);
+                if (_turnId == id && _subTurnId == subId) {
+                    _turnTimer--;
+                    runTurnTimer(playerName, id, subId);
+                }
             }
             
         }, SchedulerUtils.TICKS_PER_SECOND);

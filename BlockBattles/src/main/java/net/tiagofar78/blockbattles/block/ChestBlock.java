@@ -1,9 +1,10 @@
 package net.tiagofar78.blockbattles.block;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 
+import net.tiagofar78.blockbattles.BBGame;
 import net.tiagofar78.blockbattles.BBPlayer;
-import net.tiagofar78.blockbattles.Board;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
 
 public class ChestBlock extends Block {
@@ -14,9 +15,11 @@ public class ChestBlock extends Block {
     }
 
     @Override
-    public void executePlacement(Board board, BBPlayer player1, BBPlayer player2) {
+    public void executePlacement(BBGame game, BBPlayer placer, BBPlayer otherPlayer, Location location) {
         double damage = ConfigManager.getInstance().getChestDamage();
-        player2.damage(damage);
+        otherPlayer.damage(damage);
+        
+        game.changeTurn();
     }
 
 }

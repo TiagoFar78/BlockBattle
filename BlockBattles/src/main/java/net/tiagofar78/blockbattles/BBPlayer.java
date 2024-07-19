@@ -12,6 +12,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 import net.tiagofar78.blockbattles.block.Block;
 import net.tiagofar78.blockbattles.block.ChestBlock;
+import net.tiagofar78.blockbattles.block.OakDoorBlock;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
 import net.tiagofar78.blockbattles.managers.MessagesManager;
 
@@ -189,10 +190,10 @@ public class BBPlayer {
         deck.add(new ChestBlock());
         deck.add(new ChestBlock());
         deck.add(new ChestBlock());
-        deck.add(new ChestBlock());
-        deck.add(new ChestBlock());
-        deck.add(new ChestBlock());
-        deck.add(new ChestBlock());
+        deck.add(new OakDoorBlock());
+        deck.add(new OakDoorBlock());
+        deck.add(new OakDoorBlock());
+        deck.add(new OakDoorBlock());
         
         return deck;
     }

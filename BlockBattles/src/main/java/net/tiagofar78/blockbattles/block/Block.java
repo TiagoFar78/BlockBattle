@@ -2,12 +2,13 @@ package net.tiagofar78.blockbattles.block;
 
 import java.util.List;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import net.tiagofar78.blockbattles.BBGame;
 import net.tiagofar78.blockbattles.BBPlayer;
-import net.tiagofar78.blockbattles.Board;
 import net.tiagofar78.blockbattles.managers.MessagesManager;
 
 public abstract class Block {
@@ -53,6 +54,6 @@ public abstract class Block {
         }
     }
     
-    public abstract void executePlacement(Board board, BBPlayer player1, BBPlayer player2);
+    public abstract void executePlacement(BBGame game, BBPlayer placer, BBPlayer otherPlayer, Location location);
 
 }
