@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import net.tiagofar78.blockbattles.commands.LeaveQueueCommand;
 import net.tiagofar78.blockbattles.commands.QueueCommand;
+import net.tiagofar78.blockbattles.listener.PlayerListener;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
 import net.tiagofar78.blockbattles.managers.MessagesManager;
 import net.tiagofar78.blockbattles.managers.SchematicsManager;
@@ -21,6 +22,8 @@ public class BlockBattles extends JavaPlugin {
         
         getCommand("queue").setExecutor(new QueueCommand());
         getCommand("leavequeue").setExecutor(new LeaveQueueCommand());
+        
+        Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
 
         loadResourcesAndManagers();
     }

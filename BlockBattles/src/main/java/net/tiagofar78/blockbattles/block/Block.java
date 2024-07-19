@@ -6,6 +6,8 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import net.tiagofar78.blockbattles.BBPlayer;
+import net.tiagofar78.blockbattles.Board;
 import net.tiagofar78.blockbattles.managers.MessagesManager;
 
 public abstract class Block {
@@ -50,5 +52,7 @@ public abstract class Block {
             meta.setLore(lore);
         }
     }
+    
+    public abstract void executePlacement(Board board, BBPlayer player1, BBPlayer player2);
 
 }

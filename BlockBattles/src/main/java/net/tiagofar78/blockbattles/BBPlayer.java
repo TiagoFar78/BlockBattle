@@ -47,8 +47,8 @@ public class BBPlayer {
         return _health;
     }
     
-    public void updateHealth(double amount) {
-        _health += amount;
+    public void damage(double amount) {
+        _health -= amount;
         if (_health < 0) {
             _health = 0;
         }

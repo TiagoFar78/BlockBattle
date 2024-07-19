@@ -32,9 +32,12 @@ public class ConfigManager {
     
     private String _worldName;
     private Location _referenceLocation;
+    private Location _boardSizeLocation;
     private Location _player1SpawnPoint;
     private Location _player2SpawnPoint;
     private Location _exitLocation;
+    
+    private double _chestDamage;
     
     private ConfigManager() {
         YamlConfiguration config = BBResources.getYamlConfiguration();
@@ -51,10 +54,14 @@ public class ConfigManager {
         String locationsPath = "Locations.";
         World bbWorld = Bukkit.getWorld(_worldName);
         _referenceLocation = createLocation(bbWorld, config, locationsPath + "Reference");
+        _boardSizeLocation = createLocation(bbWorld, config, locationsPath + "BoardSize");
         _player1SpawnPoint = createLocation(bbWorld, config, locationsPath + "Player1SpawnPoint");
         _player2SpawnPoint = createLocation(bbWorld, config, locationsPath + "Player2SpawnPoint");
         World exitWorld = Bukkit.getWorld(config.getString(locationsPath + "Exit.World"));
         _exitLocation = createLocation(exitWorld, config, locationsPath + "Exit");
+        
+        String itemsPath = "Items.";
+        _chestDamage = config.getDouble(itemsPath + "Chest.Damage");
     }
     
     private Location createLocation(World world, YamlConfiguration config, String path) {
@@ -97,6 +104,10 @@ public class ConfigManager {
         return createLocationCopy(_referenceLocation);
     }
     
+    public Location getBoardSizeLocation() {
+        return createLocationCopy(_boardSizeLocation);
+    }
+    
     public Location getPlayer1SpawnPoint() {
         return createLocationCopy(_player1SpawnPoint);
     }
@@ -107,6 +118,10 @@ public class ConfigManager {
     
     public Location getExitLocation() {
         return createLocationCopy(_exitLocation);
+    }
+    
+    public double getChestDamage() {
+        return _chestDamage;
     }
 
 //  ########################################

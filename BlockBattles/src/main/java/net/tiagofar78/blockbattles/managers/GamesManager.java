@@ -6,6 +6,8 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import net.tiagofar78.blockbattles.BBGame;
+import net.tiagofar78.blockbattles.BBPlayer;
+import net.tiagofar78.blockbattles.dataobjects.BBGamePlayer;
 
 public class GamesManager {
     
@@ -39,6 +41,21 @@ public class GamesManager {
         if (sparePlayers != null) {
             startGame(sparePlayers.get(0), sparePlayers.get(1));
         }
+    }
+    
+    public static BBGamePlayer findGameAndPlayer(Player player) {
+        for (int i = 0; i < games.length; i++) {
+            if (games[i] == null) {
+                continue;
+            }
+            
+            BBPlayer bbPlayer = games[i].getPlayer(player);
+            if (bbPlayer != null) {
+                return new BBGamePlayer(games[i], bbPlayer);
+            }
+        }
+        
+        return null;
     }
 
 }
