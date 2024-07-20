@@ -35,3 +35,7 @@ Items:
     Damage: 4
     MaxInteractions: 3
     SecondsToInteract: 1
+  OakFenceGate:
+    Damage: 4
+    MaxInteractions: 3
+    SecondsToInteract: 1
