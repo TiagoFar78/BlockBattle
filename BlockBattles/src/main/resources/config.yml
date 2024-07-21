@@ -43,3 +43,5 @@ Items:
     Damage: 8
   Torch:
     Damage: 6
+  RedstoneLamp:
+    Damage: 5

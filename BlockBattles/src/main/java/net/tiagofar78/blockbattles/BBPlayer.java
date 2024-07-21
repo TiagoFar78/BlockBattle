@@ -15,6 +15,7 @@ import net.tiagofar78.blockbattles.block.ChestBlock;
 import net.tiagofar78.blockbattles.block.OakDoorBlock;
 import net.tiagofar78.blockbattles.block.OakFenceGateBlock;
 import net.tiagofar78.blockbattles.block.OakTrapdoorBlock;
+import net.tiagofar78.blockbattles.block.RedstoneLampBlock;
 import net.tiagofar78.blockbattles.block.TorchBlock;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
 import net.tiagofar78.blockbattles.managers.MessagesManager;
@@ -194,6 +195,7 @@ public class BBPlayer {
         deck.add(new OakFenceGateBlock());
         deck.add(new OakTrapdoorBlock());
         deck.add(new TorchBlock());
+        deck.add(new RedstoneLampBlock());
         
         return deck;
     }

@@ -46,6 +46,7 @@ public class ConfigManager {
     private int _oakFenceGateSecondsToInteract;
     private double _oakTrapdoorDamage;
     private double _torchDamage;
+    private double _redstoneLampDamage;
     
     private ConfigManager() {
         YamlConfiguration config = BBResources.getYamlConfiguration();
@@ -78,6 +79,7 @@ public class ConfigManager {
         _oakFenceGateSecondsToInteract = config.getInt(itemsPath + "OakFenceGate.SecondsToInteract");
         _oakTrapdoorDamage = config.getDouble(itemsPath + "OakTrapdoor.Damage");
         _torchDamage = config.getDouble(itemsPath + "Torch.Damage");
+        _redstoneLampDamage = config.getDouble(itemsPath + "RedstoneLamp.Damage");;
     }
     
     private Location createLocation(World world, YamlConfiguration config, String path) {
@@ -170,6 +172,10 @@ public class ConfigManager {
     
     public double getTorchDamage() {
         return _torchDamage;
+    }
+    
+    public double getRedstoneLampDamage() {
+        return _redstoneLampDamage;
     }
 
 //  ########################################
