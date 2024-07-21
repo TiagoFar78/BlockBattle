@@ -41,3 +41,5 @@ Items:
     SecondsToInteract: 1
   OakTrapdoor:
     Damage: 8
+  Torch:
+    Damage: 6

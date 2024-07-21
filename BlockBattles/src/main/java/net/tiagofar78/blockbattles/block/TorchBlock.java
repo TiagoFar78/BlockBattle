@@ -7,17 +7,17 @@ import net.tiagofar78.blockbattles.BBGame;
 import net.tiagofar78.blockbattles.BBPlayer;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
 
-public class OakTrapdoorBlock extends Block {
+public class TorchBlock extends Block {
 
     @Override
     public Material getMaterial() {
-        return Material.OAK_TRAPDOOR;
+        return Material.TORCH;
     }
 
     @Override
     public void executePlacement(BBGame game, BBPlayer placer, BBPlayer otherPlayer, Location location) {
         ConfigManager config = ConfigManager.getInstance();
-        otherPlayer.damage(config.getOakTrapdoorDamage());
+        otherPlayer.damage(config.getTorchDamage());
         
         game.changeTurn();
     }
