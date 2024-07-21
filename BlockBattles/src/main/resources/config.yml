@@ -39,3 +39,5 @@ Items:
     Damage: 4
     MaxInteractions: 3
     SecondsToInteract: 1
+  OakTrapdoor:
+    Damage: 8
