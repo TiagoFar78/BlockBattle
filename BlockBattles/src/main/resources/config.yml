@@ -47,3 +47,5 @@ Items:
     Damage: 5
   FlowerPot:
     Damage: 2
+  PointedDripstoneDamage:
+    Damage: 6
