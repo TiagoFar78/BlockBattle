@@ -9,6 +9,10 @@ import net.tiagofar78.blockbattles.managers.ConfigManager;
 
 public class OakDoorBlock extends Block implements Interactable {
     
+    public Block createNewInstance() {
+        return new OakDoorBlock();
+    }
+    
     private BBPlayer _placer;
     private int _interactionCount = 0;
     private int _turnId;

@@ -8,6 +8,10 @@ import net.tiagofar78.blockbattles.BBPlayer;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
 
 public class PointedDripstoneBlock extends Block {
+    
+    public Block createNewInstance() {
+        return new PointedDripstoneBlock();
+    }
 
     @Override
     public Material getMaterial() {

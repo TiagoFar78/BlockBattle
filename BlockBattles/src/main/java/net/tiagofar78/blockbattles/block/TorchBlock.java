@@ -8,6 +8,10 @@ import net.tiagofar78.blockbattles.BBPlayer;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
 
 public class TorchBlock extends Block {
+    
+    public Block createNewInstance() {
+        return new TorchBlock();
+    }
 
     @Override
     public Material getMaterial() {

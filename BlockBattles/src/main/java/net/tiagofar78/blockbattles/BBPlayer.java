@@ -100,7 +100,7 @@ public class BBPlayer {
         int invIndex = toHandIndex(slot);
         
         int randomIndex = new Random().nextInt(_deck.size());
-        Block randomBlock = _deck.get(randomIndex);
+        Block randomBlock = _deck.get(randomIndex).createNewInstance();
         
         _hand.set(invIndex, randomBlock);
         updateInventory();

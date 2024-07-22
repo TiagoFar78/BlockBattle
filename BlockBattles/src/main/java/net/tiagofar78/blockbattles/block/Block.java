@@ -12,6 +12,8 @@ import net.tiagofar78.blockbattles.BBPlayer;
 import net.tiagofar78.blockbattles.managers.MessagesManager;
 
 public abstract class Block {
+    
+    public abstract Block createNewInstance();
 
     public abstract Material getMaterial();
 

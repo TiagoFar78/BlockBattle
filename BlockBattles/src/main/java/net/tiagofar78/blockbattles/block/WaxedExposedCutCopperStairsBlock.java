@@ -8,6 +8,10 @@ import net.tiagofar78.blockbattles.BBPlayer;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
 
 public class WaxedExposedCutCopperStairsBlock extends Block {
+    
+    public Block createNewInstance() {
+        return new WaxedExposedCutCopperStairsBlock();
+    }
 
     @Override
     public Material getMaterial() {

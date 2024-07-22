@@ -160,7 +160,7 @@ public class BBGame {
         }
         
         if (!(block instanceof Interactable)) {
-            return true;
+            return false;
         }
         
         if (!isPlayerTurn(player)) {

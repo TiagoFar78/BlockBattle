@@ -8,6 +8,10 @@ import net.tiagofar78.blockbattles.BBPlayer;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
 
 public class ChestBlock extends Block {
+    
+    public Block createNewInstance() {
+        return new ChestBlock();
+    }
 
     @Override
     public Material getMaterial() {

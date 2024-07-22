@@ -8,6 +8,10 @@ import net.tiagofar78.blockbattles.BBPlayer;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
 
 public class OakTrapdoorBlock extends Block {
+    
+    public Block createNewInstance() {
+        return new OakTrapdoorBlock();
+    }
 
     @Override
     public Material getMaterial() {

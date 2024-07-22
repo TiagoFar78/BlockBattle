@@ -8,6 +8,10 @@ import net.tiagofar78.blockbattles.BBPlayer;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
 
 public class RedstoneLampBlock extends Block {
+    
+    public Block createNewInstance() {
+        return new RedstoneLampBlock();
+    }
 
     @Override
     public Material getMaterial() {
