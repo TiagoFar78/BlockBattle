@@ -12,6 +12,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 import net.tiagofar78.blockbattles.block.Block;
 import net.tiagofar78.blockbattles.block.ChestBlock;
+import net.tiagofar78.blockbattles.block.FlowerPotBlock;
 import net.tiagofar78.blockbattles.block.OakDoorBlock;
 import net.tiagofar78.blockbattles.block.OakFenceGateBlock;
 import net.tiagofar78.blockbattles.block.OakTrapdoorBlock;
@@ -196,6 +197,7 @@ public class BBPlayer {
         deck.add(new OakTrapdoorBlock());
         deck.add(new TorchBlock());
         deck.add(new RedstoneLampBlock());
+        deck.add(new FlowerPotBlock());
         
         return deck;
     }

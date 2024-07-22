@@ -45,3 +45,5 @@ Items:
     Damage: 6
   RedstoneLamp:
     Damage: 5
+  FlowerPot:
+    Damage: 2
