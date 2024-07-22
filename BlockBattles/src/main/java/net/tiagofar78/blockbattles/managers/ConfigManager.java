@@ -49,6 +49,7 @@ public class ConfigManager {
     private double _redstoneLampDamage;
     private double _flowerPotDamage;
     private double _pointedDripstoneDamage;
+    private double _waxedExposedCutCopperStairsDamage;
     
     private ConfigManager() {
         YamlConfiguration config = BBResources.getYamlConfiguration();
@@ -84,6 +85,7 @@ public class ConfigManager {
         _redstoneLampDamage = config.getDouble(itemsPath + "RedstoneLamp.Damage");
         _flowerPotDamage = config.getDouble(itemsPath + "FlowerPot.Damage");
         _pointedDripstoneDamage = config.getDouble(itemsPath + "PointedDripstone.Damage");
+        _waxedExposedCutCopperStairsDamage = config.getDouble(itemsPath + "WaxedExposedCutCopperStairs.Damage");
     }
     
     private Location createLocation(World world, YamlConfiguration config, String path) {
@@ -188,6 +190,10 @@ public class ConfigManager {
     
     public double getPointedDripstoneDamage() {
         return _pointedDripstoneDamage;
+    }
+    
+    public double getWaxedExposedCutCopperStairsDamage() {
+        return _waxedExposedCutCopperStairsDamage;
     }
 
 //  ########################################

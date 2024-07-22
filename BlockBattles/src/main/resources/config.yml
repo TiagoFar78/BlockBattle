@@ -49,3 +49,5 @@ Items:
     Damage: 2
   PointedDripstoneDamage:
     Damage: 6
+  WaxedExposedCutCopperStairs:
+    Damage: 5
