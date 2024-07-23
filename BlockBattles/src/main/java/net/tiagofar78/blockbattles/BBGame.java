@@ -86,7 +86,11 @@ public class BBGame {
     
     public void removePlayer(BBPlayer player) {
         Location exitLocation = ConfigManager.getInstance().getExitLocation();
-        player.getBukkitPlayer().teleport(exitLocation);
+        
+        Player bukkitPlayer = player.getBukkitPlayer();
+        bukkitPlayer.teleport(exitLocation);
+        bukkitPlayer.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
+        bukkitPlayer.setHealth(BBPlayer.BUKKIT_MAX_HEALTH);
     }
     
     public BBPlayer getPlayer(Player player) {
@@ -222,6 +226,10 @@ public class BBGame {
     }
     
     private void runTurnTimer(String playerName, int id, int subId) {
+        if (!_phase.isClockWorking()) {
+            return;
+        }
+        
         Player bukkitPlayer1 = _player1.getBukkitPlayer();
         Player bukkitPlayer2 = _player2.getBukkitPlayer();
         

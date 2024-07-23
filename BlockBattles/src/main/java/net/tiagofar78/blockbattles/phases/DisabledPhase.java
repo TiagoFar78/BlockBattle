@@ -16,7 +16,11 @@ public class DisabledPhase extends Phase {
         game.removePlayer(game.getPlayer2());
         
         GamesManager.removeGame(game.getIndex());
-        
+    }
+
+    @Override
+    public boolean isClockWorking() {
+        return false;
     }
 
 }

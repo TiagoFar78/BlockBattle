@@ -24,6 +24,7 @@ public class ConfigManager {
     
     private int _maxGames;
     private int _turnSeconds;
+    private int _finishedSeconds;
     private int _startingHealth;
     private int _startingHandSize;
     
@@ -56,6 +57,7 @@ public class ConfigManager {
         
         _maxGames = config.getInt("MaxSimultaneousGames");
         _turnSeconds = config.getInt("TurnSeconds");
+        _finishedSeconds = config.getInt("FinishedSeconds");
         _startingHealth = config.getInt("StartingHealth");
         _startingHandSize = config.getInt("StartingHandSize");
         
@@ -102,6 +104,10 @@ public class ConfigManager {
     
     public int getTurnSeconds() {
         return _turnSeconds;
+    }
+    
+    public int getFinishedSeconds() {
+        return _finishedSeconds;
     }
     
     public int getStartingHealth() {

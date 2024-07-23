@@ -10,6 +10,9 @@ Messages:
     LostTurnOwn: "&cYou lost your turn because you took to long to play"
     LostTurnOther: "&b{PLAYER} &etook to long to play. It is now your turn"
     TurnDuration: "&b{PLAYER} &ehas &b{SECONDS} &eseconds to play"
+    ResultTitle: "&6{WINNER} WON"
+    ResultSubtitle: "&fwith &a{HEALTH} &fhealth remaining"
+    GameResult: "&6{WINNER} &fwon against &f{LOSER}."
   Errors:
     AlreadyInQueue: "&cYou are already in the queue"
     NotInQueue: "&cYou are not in the queue"

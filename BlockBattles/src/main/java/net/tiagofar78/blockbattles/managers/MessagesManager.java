@@ -73,6 +73,9 @@ public class MessagesManager {
     private String _lostTurnOwnMessage;
     private String _lostTurnOtherMessage;
     private String _turnDurationMessage;
+    private String _resultTitle;
+    private String _resultSubtitle;
+    private String _gameResultMessage;
 
 //  ########################################
 //  #                Errors                #
@@ -102,6 +105,9 @@ public class MessagesManager {
         _lostTurnOwnMessage = createMessage(messages.getString(warningPath + "LostTurnOwn"));
         _lostTurnOtherMessage = createMessage(messages.getString(warningPath + "LostTurnOther"));
         _turnDurationMessage = createMessage(messages.getString(warningPath + "TurnDuration"));
+        _resultTitle = createMessage(messages.getString(warningPath + "ResultTitle"));
+        _resultSubtitle = createMessage(messages.getString(warningPath + "ResultSubtitle"));
+        _gameResultMessage = createMessage(messages.getString(warningPath + "GameResult"));
         
         String errorPath = "Messages.Errors.";
         _alreadyInQueueMessage = createMessage(messages.getString(errorPath + "AlreadyInQueue"));
@@ -180,6 +186,18 @@ public class MessagesManager {
     
     public String getTurnDurationMessage(String playerName, int seconds) {
         return _turnDurationMessage.replace("{PLAYER}", playerName).replace("{SECONDS}", Integer.toString(seconds));
+    }
+    
+    public String getResultTitle(String winnerName) {
+        return _resultTitle.replace("{WINNER}", winnerName);
+    }
+    
+    public String getResultSubtitle(double health) {
+        return _resultSubtitle.replace("{HEALTH}", Double.toString(health));
+    }
+    
+    public String getGameResultMessage(String winnerName, String loserName) {
+        return _gameResultMessage.replace("{WINNER}", winnerName).replace("{LOSER}", loserName);
     }
 
 //  ########################################

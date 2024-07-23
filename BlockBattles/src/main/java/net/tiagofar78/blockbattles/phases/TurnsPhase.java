@@ -8,7 +8,7 @@ public class TurnsPhase extends Phase {
     
     @Override
     public Phase next() {
-        return new DisabledPhase();
+        return new FinishedPhase();
     }
 
     @Override
@@ -18,6 +18,11 @@ public class TurnsPhase extends Phase {
         
         game.getPlayer1().setScoreboardData(game);
         game.getPlayer2().setScoreboardData(game);
+    }
+
+    @Override
+    public boolean isClockWorking() {
+        return true;
     }
 
 }

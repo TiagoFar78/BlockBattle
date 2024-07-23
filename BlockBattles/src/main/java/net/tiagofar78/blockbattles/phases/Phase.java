@@ -8,4 +8,6 @@ public abstract class Phase {
 
     public abstract void start(BBGame game);
     
+    public abstract boolean isClockWorking();
+    
 }

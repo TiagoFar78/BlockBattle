@@ -25,7 +25,7 @@ import net.tiagofar78.blockbattles.managers.MessagesManager;
 
 public class BBPlayer {
     
-    private final static int BUKKIT_MAX_HEALTH = 20;
+    public final static int BUKKIT_MAX_HEALTH = 20;
     private final static int SCOREBOARD_HEALTH_LINE_1 = 1;
     private final static int SCOREBOARD_HEALTH_LINE_2 = 2;
     private final static int INVENTORY_STARTING_SLOT = 0;
@@ -57,8 +57,9 @@ public class BBPlayer {
     
     public void damage(double amount) {
         _health -= amount;
-        if (_health < 0) {
+        if (_health <= 0) {
             _health = 0;
+            return;
         }
         
         int maxBBPlayerHealth = ConfigManager.getInstance().getStartingHealth();
@@ -71,6 +72,7 @@ public class BBPlayer {
         inv.setArmorContents(new ItemStack[4]);
         inv.setItemInOffHand(null);
         
+        _player.setHealth(BUKKIT_MAX_HEALTH);
         _player.setGameMode(GameMode.SURVIVAL);
     }
     

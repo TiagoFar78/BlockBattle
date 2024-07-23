@@ -1,5 +1,6 @@
 MaxSimultaneousGames: 30
 TurnSeconds: 15
+FinishedSeconds: 10
 StartingHealth: 100
 StartingHandSize: 3
 DefaultLanguage: "english"
