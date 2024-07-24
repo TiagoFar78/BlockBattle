@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.GameMode;
+import org.bukkit.WeatherType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -26,9 +27,12 @@ import net.tiagofar78.blockbattles.managers.MessagesManager;
 public class BBPlayer {
     
     public final static int BUKKIT_MAX_HEALTH = 20;
+    private final static int BUKKIT_MAX_SATURATION = 20;
+    public final static int DEFAULT_SATURATED_REGEN = 10;
     private final static int SCOREBOARD_HEALTH_LINE_1 = 1;
     private final static int SCOREBOARD_HEALTH_LINE_2 = 2;
     private final static int INVENTORY_STARTING_SLOT = 0;
+    private final static int MIDDAY_TICKS = 6000;
     
     private Player _player;
     private double _health;
@@ -73,7 +77,11 @@ public class BBPlayer {
         inv.setItemInOffHand(null);
         
         _player.setHealth(BUKKIT_MAX_HEALTH);
+        _player.setSaturation(BUKKIT_MAX_SATURATION);
         _player.setGameMode(GameMode.SURVIVAL);
+        _player.setPlayerTime(MIDDAY_TICKS, false);
+        _player.setPlayerWeather(WeatherType.CLEAR);
+        _player.setSaturatedRegenRate(0);
     }
     
     @Override

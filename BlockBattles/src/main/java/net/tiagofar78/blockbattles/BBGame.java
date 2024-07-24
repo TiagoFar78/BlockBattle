@@ -91,6 +91,10 @@ public class BBGame {
         bukkitPlayer.teleport(exitLocation);
         bukkitPlayer.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         bukkitPlayer.setHealth(BBPlayer.BUKKIT_MAX_HEALTH);
+        bukkitPlayer.getInventory().clear();
+        bukkitPlayer.resetPlayerTime();
+        bukkitPlayer.resetPlayerWeather();
+        bukkitPlayer.setSaturatedRegenRate(BBPlayer.DEFAULT_SATURATED_REGEN);
     }
     
     public BBPlayer getPlayer(Player player) {
