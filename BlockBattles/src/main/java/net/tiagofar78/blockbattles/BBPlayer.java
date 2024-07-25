@@ -4,12 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.bukkit.GameMode;
-import org.bukkit.WeatherType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 
 import net.tiagofar78.blockbattles.block.Block;
 import net.tiagofar78.blockbattles.block.ChestBlock;
@@ -70,18 +66,8 @@ public class BBPlayer {
         _player.setHealth(_health * BUKKIT_MAX_HEALTH / maxBBPlayerHealth);
     }
     
-    public void reset() {
-        PlayerInventory inv = _player.getInventory();
-        inv.clear();
-        inv.setArmorContents(new ItemStack[4]);
-        inv.setItemInOffHand(null);
-        
-        _player.setHealth(BUKKIT_MAX_HEALTH);
-        _player.setSaturation(BUKKIT_MAX_SATURATION);
-        _player.setGameMode(GameMode.SURVIVAL);
-        _player.setPlayerTime(MIDDAY_TICKS, false);
-        _player.setPlayerWeather(WeatherType.CLEAR);
-        _player.setSaturatedRegenRate(0);
+    public void kill() {
+        _health = 0;
     }
     
     @Override

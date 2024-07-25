@@ -94,7 +94,15 @@ public class BBGame {
         bukkitPlayer.getInventory().clear();
         bukkitPlayer.resetPlayerTime();
         bukkitPlayer.resetPlayerWeather();
-        bukkitPlayer.setSaturatedRegenRate(BBPlayer.DEFAULT_SATURATED_REGEN);
+    }
+    
+    public void playerLeft(BBPlayer player) {
+        removePlayer(player);
+        player.kill();
+        
+        if (_phase.isClockWorking()) {
+            visuallyApplyResult();
+        }
     }
     
     public BBPlayer getPlayer(Player player) {
