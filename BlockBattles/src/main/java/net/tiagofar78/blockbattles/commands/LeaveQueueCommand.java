@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import net.tiagofar78.blockbattles.managers.GamesManager;
 import net.tiagofar78.blockbattles.managers.MessagesManager;
 import net.tiagofar78.blockbattles.managers.QueueManager;
 
@@ -17,9 +18,14 @@ public class LeaveQueueCommand implements CommandExecutor {
         }
         
         Player player = (Player) sender;
-        int returnCode = QueueManager.leaveQueue(player);
-
         MessagesManager messages = MessagesManager.getInstanceByPlayer(player.getName());
+        
+        if (GamesManager.findGameAndPlayer(player) != null) {
+            player.sendMessage(messages.getCantExecuteInGameMessage());
+            return false;
+        }
+        
+        int returnCode = QueueManager.leaveQueue(player);
         if (returnCode == 0) {
             player.sendMessage(messages.getLeftQueueMessage());
         }

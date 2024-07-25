@@ -16,6 +16,7 @@ Messages:
   Errors:
     AlreadyInQueue: "&cYou are already in the queue"
     NotInQueue: "&cYou are not in the queue"
+    CantExecuteInGame: "&cYou cannot execute this command while in a game."
 Items:
   Chest:
     Lore:

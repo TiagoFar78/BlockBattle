@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import net.tiagofar78.blockbattles.dataobjects.BBGamePlayer;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
@@ -49,6 +50,14 @@ public class PlayerListener implements Listener {
         if (gameAndPlayer != null) {
             boolean cancel = gameAndPlayer.getGame().playerInteractedWithBlock(gameAndPlayer.getPlayer(), location);
             e.setCancelled(cancel);
+        }
+    }
+    
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent e) {
+        BBGamePlayer gameAndPlayer = GamesManager.findGameAndPlayer(e.getPlayer());
+        if (gameAndPlayer != null) {
+            gameAndPlayer.getGame().playerLeft(gameAndPlayer.getPlayer());
         }
     }
 

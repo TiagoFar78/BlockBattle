@@ -83,6 +83,7 @@ public class MessagesManager {
     
     private String _alreadyInQueueMessage;
     private String _notInQueueMessage;
+    private String _cantExecuteInGameMessage;
 
 //  #######################################
 //  #                Items                #
@@ -112,6 +113,7 @@ public class MessagesManager {
         String errorPath = "Messages.Errors.";
         _alreadyInQueueMessage = createMessage(messages.getString(errorPath + "AlreadyInQueue"));
         _notInQueueMessage = createMessage(messages.getString(errorPath + "NotInQueue"));
+        _cantExecuteInGameMessage = createMessage(messages.getString(errorPath + "CantExecuteInGame"));
 
         _itemsNames = new Hashtable<>();
         _itemsLores = new Hashtable<>();
@@ -210,6 +212,10 @@ public class MessagesManager {
     
     public String getNotInQueueMessage() {
         return _notInQueueMessage;
+    }
+    
+    public String getCantExecuteInGameMessage() {
+        return _cantExecuteInGameMessage;
     }
 
 //  #######################################
