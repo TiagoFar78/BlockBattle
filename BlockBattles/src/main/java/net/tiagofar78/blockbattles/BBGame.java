@@ -1,8 +1,12 @@
 package net.tiagofar78.blockbattles;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.WeatherType;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -16,6 +20,8 @@ import net.tiagofar78.blockbattles.phases.TurnsPhase;
 import net.tiagofar78.blockbattles.utils.SchedulerUtils;
 
 public class BBGame {
+
+    private final static int MIDDAY_TICKS = 6000;
     
     private int _index;
     private Location _referenceLoc;
@@ -79,8 +85,20 @@ public class BBGame {
 //  #########################################
     
     public void addPlayer(BBPlayer player, Location spawnPoint) {
-        player.reset();
-        player.getBukkitPlayer().teleport(spawnPoint);
+
+        Player bukkitPlayer = player.getBukkitPlayer();
+        PlayerInventory inv = bukkitPlayer.getInventory();
+        inv.clear();
+        inv.setArmorContents(new ItemStack[4]);
+        inv.setItemInOffHand(null);
+        
+        bukkitPlayer.setHealth(BBPlayer.BUKKIT_MAX_HEALTH);
+        bukkitPlayer.setFoodLevel(BBPlayer.BUKKIT_MAX_FOOD_LEVEL);
+        bukkitPlayer.setGameMode(GameMode.SURVIVAL);
+        bukkitPlayer.setPlayerTime(MIDDAY_TICKS, false);
+        bukkitPlayer.setPlayerWeather(WeatherType.CLEAR);
+        
+        bukkitPlayer.teleport(spawnPoint);
         player.updateInventory();
     }
     
@@ -187,10 +205,10 @@ public class BBGame {
         boolean isCancelled = ((Interactable) block).interact(this, player, otherPlayer, location);
         visuallyApplyResult();
         
-        return isCancelled;        
+        return isCancelled;
     }
     
-    private void visuallyApplyResult() {        
+    private void visuallyApplyResult() {
         _player1.updateScoreboardHealthLines(this);
         _player2.updateScoreboardHealthLines(this);
         

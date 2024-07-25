@@ -23,12 +23,10 @@ import net.tiagofar78.blockbattles.managers.MessagesManager;
 public class BBPlayer {
     
     public final static int BUKKIT_MAX_HEALTH = 20;
-    private final static int BUKKIT_MAX_SATURATION = 20;
-    public final static int DEFAULT_SATURATED_REGEN = 10;
+    public final static int BUKKIT_MAX_FOOD_LEVEL = 20;
     private final static int SCOREBOARD_HEALTH_LINE_1 = 1;
     private final static int SCOREBOARD_HEALTH_LINE_2 = 2;
     private final static int INVENTORY_STARTING_SLOT = 0;
-    private final static int MIDDAY_TICKS = 6000;
     
     private Player _player;
     private double _health;
@@ -63,7 +61,7 @@ public class BBPlayer {
         }
         
         int maxBBPlayerHealth = ConfigManager.getInstance().getStartingHealth();
-        _player.setHealth(_health * BUKKIT_MAX_HEALTH / maxBBPlayerHealth);
+        _player.setHealth(_health * (double) BUKKIT_MAX_HEALTH / (double) maxBBPlayerHealth);
     }
     
     public void kill() {
