@@ -1,5 +1,7 @@
 package net.tiagofar78.blockbattles;
 
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -82,7 +84,6 @@ public class BBGame {
 //  #########################################
     
     public void addPlayer(BBPlayer player, Location spawnPoint) {
-
         Player bukkitPlayer = player.getBukkitPlayer();
         PlayerInventory inv = bukkitPlayer.getInventory();
         inv.clear();
@@ -168,8 +169,14 @@ public class BBGame {
             return true;
         }
         
+        List<Block> availableCombos = player.getAvailableCombos();
+        if (availableCombos != null && !availableCombos.contains(block)) {
+            return true;
+        }
+        
         BBPlayer otherPlayer = _isPlayer1Turn ? _player2 : _player1;
         block.executePlacement(this, player, otherPlayer, location);
+        player.setAvailableCombos(block.getAvailableCombos());
         
         _board.setBlock(location, block);
         player.usedItemAt(slot);
@@ -237,6 +244,7 @@ public class BBGame {
         _isPlayer1Turn = !_isPlayer1Turn;
         
         BBPlayer player = _isPlayer1Turn ? _player1 : _player2;
+        player.clearCombo();
         _turnTimer = ConfigManager.getInstance().getTurnSeconds();
         _turnId++;
         _subTurnId = 0;

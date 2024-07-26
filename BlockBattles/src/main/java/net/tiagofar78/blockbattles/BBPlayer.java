@@ -32,6 +32,7 @@ public class BBPlayer {
     private double _health;
     private ScoreboardData _sbData;
     private List<Block> _hand;
+    private List<Block> _availableCombos;
     
     private List<Block> _deck;
     
@@ -66,6 +67,18 @@ public class BBPlayer {
     
     public void kill() {
         _health = 0;
+    }
+    
+    public List<Block> getAvailableCombos() {
+        return _availableCombos;
+    }
+    
+    public void clearCombo() {
+        _availableCombos = null;
+    }
+    
+    public void setAvailableCombos(List<Block> combos) {
+        _availableCombos = combos;
     }
     
     @Override

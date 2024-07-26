@@ -1,5 +1,6 @@
 package net.tiagofar78.blockbattles.block;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Location;
@@ -57,5 +58,9 @@ public abstract class Block {
     }
     
     public abstract void executePlacement(BBGame game, BBPlayer placer, BBPlayer otherPlayer, Location location);
+    
+    public List<Block> getAvailableCombos() {
+        return new ArrayList<>();
+    }
 
 }
