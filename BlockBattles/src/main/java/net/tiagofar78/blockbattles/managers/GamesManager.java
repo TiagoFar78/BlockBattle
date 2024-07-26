@@ -20,11 +20,11 @@ public class GamesManager {
      *          -1 if could not start game
      */
     public static int startGame(Player player1, Player player2) {
-        for (int i = 0; i < games.length; i++) {
+        ConfigManager config = ConfigManager.getInstance();
+        
+        for (int i = 0; i < config.getMaxGames(); i++) {
             if (games[i] == null) {
-                ConfigManager config = ConfigManager.getInstance();
-                
-                Location referenceLocation = config.getReferenceLocation().add(i * GAMES_DISTANCE, 0, 0);
+                Location referenceLocation = getReferenceLocation(config, i);
                 
                 games[i] = new BBGame(i, referenceLocation, player1, player2);
                 return 0;
@@ -56,6 +56,18 @@ public class GamesManager {
         }
         
         return null;
+    }
+    
+    public static void generateMaps() {
+        ConfigManager config = ConfigManager.getInstance();
+
+        for (int i = 0; i < config.getMaxGames(); i++) {
+            SchematicsManager.pasteMapSchematic(getReferenceLocation(config, i));
+        }
+    }
+    
+    private static Location getReferenceLocation(ConfigManager config, int index) {
+        return config.getReferenceLocation().add(index * GAMES_DISTANCE, 0, 0);
     }
 
 }

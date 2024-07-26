@@ -12,6 +12,7 @@ import net.tiagofar78.blockbattles.commands.QueueCommand;
 import net.tiagofar78.blockbattles.listener.PlayerListener;
 import net.tiagofar78.blockbattles.listener.WorldListener;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
+import net.tiagofar78.blockbattles.managers.GamesManager;
 import net.tiagofar78.blockbattles.managers.MessagesManager;
 import net.tiagofar78.blockbattles.managers.SchematicsManager;
 
@@ -33,6 +34,7 @@ public class BlockBattles extends JavaPlugin {
         loadResourcesAndManagers();
         
         setWorldDifficulty();
+        GamesManager.generateMaps();
     }
 
     public static BlockBattles getBlockBattles() {

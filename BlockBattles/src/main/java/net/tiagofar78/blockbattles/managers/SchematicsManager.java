@@ -6,8 +6,10 @@ import java.io.IOException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 
 import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.WorldEditException;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
@@ -18,8 +20,10 @@ import com.sk89q.worldedit.extent.clipboard.io.ClipboardReader;
 import com.sk89q.worldedit.function.operation.Operation;
 import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.math.BlockVector3;
+import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.session.ClipboardHolder;
 import com.sk89q.worldedit.world.World;
+import com.sk89q.worldedit.world.block.BlockState;
 
 import net.tiagofar78.blockbattles.BBResources;
 
@@ -69,6 +73,24 @@ public class SchematicsManager {
             editSession.commit();
             editSession.close();
         } catch (WorldEditException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void clear(Location loc1, Location loc2) {
+        String worldName = ConfigManager.getInstance().getWorldName();
+        World world = BukkitAdapter.adapt(Bukkit.getWorld(worldName));
+        BlockVector3 min = BlockVector3.at(loc1.getX(), loc1.getY(), loc1.getZ());
+        BlockVector3 max = BlockVector3.at(loc2.getX(), loc2.getY(), loc2.getZ());
+        CuboidRegion selection = new CuboidRegion(world, min, max);
+
+        BlockState air = BukkitAdapter.adapt(Material.AIR.createBlockData());
+        EditSession editSession = WorldEdit.getInstance().newEditSessionBuilder().world(world).build();
+        try {
+            editSession.setBlocks(selection, air);
+            editSession.commit();
+            editSession.close();
+        } catch (MaxChangedBlocksException e) {
             e.printStackTrace();
         }
     }

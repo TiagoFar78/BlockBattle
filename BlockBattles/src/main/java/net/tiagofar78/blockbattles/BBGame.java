@@ -43,17 +43,14 @@ public class BBGame {
         _player2 = new BBPlayer(player2, this);
         _board = new Board();
         
-        generateMap();
-        
         ConfigManager config = ConfigManager.getInstance();
+        
+        SchematicsManager.clear(_referenceLoc, config.getBoardSizeLocation().add(_referenceLoc).add(-1, -1, -1));
+        
         addPlayer(_player1, config.getPlayer1SpawnPoint().add(referenceLocation));
         addPlayer(_player2, config.getPlayer2SpawnPoint().add(referenceLocation));
         
         startNextPhase(new TurnsPhase());
-    }
-    
-    private void generateMap() {
-        SchematicsManager.pasteMapSchematic(_referenceLoc);
     }
     
     public int getIndex() {
