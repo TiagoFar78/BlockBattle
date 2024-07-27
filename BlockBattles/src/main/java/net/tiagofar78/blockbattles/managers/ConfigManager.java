@@ -94,8 +94,10 @@ public class ConfigManager {
         double x = config.getDouble(path + ".X");
         double y = config.getDouble(path + ".Y");
         double z = config.getDouble(path + ".Z");
+        float yaw = (float) config.getDouble(path + ".Yaw");
+        float pitch = (float) config.getDouble(path + ".Pitch");
         
-        return new Location(world, x, y, z);
+        return new Location(world, x, y, z, yaw, pitch);
     }
     
     public int getMaxGames() {
