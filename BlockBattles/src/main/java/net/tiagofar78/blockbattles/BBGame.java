@@ -160,6 +160,10 @@ public class BBGame {
             return false;
         }
         
+        if (!_phase.isClockWorking()) {
+            return true;
+        }
+        
         adapLocation(location);
         if (!_board.isValidLocation(location)) {
             return true;
@@ -195,6 +199,10 @@ public class BBGame {
         Block block = _board.getBlock(location);
         if (block == null) {
             return false;
+        }
+        
+        if (!_phase.isClockWorking()) {
+            return true;
         }
         
         if (!(block instanceof Interactable)) {
