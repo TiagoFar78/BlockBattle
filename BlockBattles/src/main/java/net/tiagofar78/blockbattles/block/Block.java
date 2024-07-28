@@ -20,9 +20,9 @@ public abstract class Block {
 
     public String getConfigName() {
         String subClassName = this.getClass().getSimpleName();
-        int itemWordLength = "Item".length();
+        int blockWordLength = "Block".length();
 
-        return subClassName.substring(0, subClassName.length() - itemWordLength);
+        return subClassName.substring(0, subClassName.length() - blockWordLength);
     }
 
     public String getDisplayName(MessagesManager messages) {
