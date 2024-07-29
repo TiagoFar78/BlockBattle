@@ -15,6 +15,7 @@ import net.tiagofar78.blockbattles.managers.ConfigManager;
 import net.tiagofar78.blockbattles.managers.GamesManager;
 import net.tiagofar78.blockbattles.managers.MessagesManager;
 import net.tiagofar78.blockbattles.managers.SchematicsManager;
+import net.tiagofar78.blockbattles.placeholders.RatingRanked;
 
 public class BlockBattles extends JavaPlugin {
     
@@ -35,6 +36,10 @@ public class BlockBattles extends JavaPlugin {
         
         setWorldDifficulty();
         GamesManager.generateMaps();
+        
+        if (pm.isPluginEnabled("PlaceholderAPI")) {
+            new RatingRanked().register();
+        }
     }
 
     public static BlockBattles getBlockBattles() {

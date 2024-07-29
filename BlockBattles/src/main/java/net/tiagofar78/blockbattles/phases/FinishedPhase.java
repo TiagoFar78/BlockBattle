@@ -6,9 +6,11 @@ import org.bukkit.entity.Player;
 import net.tiagofar78.blockbattles.BBGame;
 import net.tiagofar78.blockbattles.BBPlayer;
 import net.tiagofar78.blockbattles.BlockBattles;
-import net.tiagofar78.blockbattles.Ranking;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
 import net.tiagofar78.blockbattles.managers.MessagesManager;
+import net.tiagofar78.blockbattles.playerdata.PlayerLosses;
+import net.tiagofar78.blockbattles.playerdata.PlayerRanking;
+import net.tiagofar78.blockbattles.playerdata.PlayerWins;
 import net.tiagofar78.blockbattles.utils.SchedulerUtils;
 
 public class FinishedPhase extends Phase {
@@ -43,8 +45,8 @@ public class FinishedPhase extends Phase {
         if (game.isRanked()) {
             int rankedPoints = config.getRankedStolenPoints();
             
-            int lostPoints = Ranking.take(loserName, rankedPoints);
-            int wonPoints = Ranking.give(winnerName, rankedPoints);
+            int lostPoints = PlayerRanking.take(loserName, rankedPoints);
+            int wonPoints = PlayerRanking.give(winnerName, rankedPoints);
              
             SubtitleFunction winnerF = (messages, points) -> messages.getRankedWinnerResultSubtitle(points);
             sendGameResultMessages(bukkitPlayerWinner, winnerName, loserName, wonPoints, winnerF);
@@ -56,6 +58,9 @@ public class FinishedPhase extends Phase {
             sendGameResultMessages(bukkitPlayerWinner, winnerName, loserName, healthLeft);
             sendGameResultMessages(bukkitPlayerLoser, winnerName, loserName, healthLeft);
         }
+        
+        PlayerWins.add(winnerName);
+        PlayerLosses.add(loserName);
         
         int finishedSeconds = config.getFinishedSeconds();
         Bukkit.getScheduler().runTaskLater(BlockBattles.getBlockBattles(), new Runnable() {
@@ -95,7 +100,7 @@ public class FinishedPhase extends Phase {
     
     private interface SubtitleFunction {
         
-        String getSubtitle(MessagesManager messages, int poits);
+        String getSubtitle(MessagesManager messages, int points);
         
     }
 
