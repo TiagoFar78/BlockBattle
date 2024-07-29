@@ -26,6 +26,7 @@ public class BBGame {
     private final static int MIDDAY_TICKS = 6000;
     
     private int _index;
+    private boolean _isRanked;
     private Location _referenceLoc;
     private boolean _isPlayer1Turn;
     private int _turnId = 0;
@@ -38,8 +39,9 @@ public class BBGame {
     
     private Phase _phase;
     
-    public BBGame(int index, Location referenceLocation, Player player1, Player player2) {
+    public BBGame(int index, boolean isRanked, Location referenceLocation, Player player1, Player player2) {
         _index = index;
+        _isRanked = isRanked;
         _referenceLoc = referenceLocation;
         _player1 = new BBPlayer(player1, this);
         _player2 = new BBPlayer(player2, this);
@@ -57,6 +59,10 @@ public class BBGame {
     
     public int getIndex() {
         return _index;
+    }
+    
+    public boolean isRanked() {
+        return _isRanked;
     }
     
     public void setIsPlayer1Turn(boolean value) {

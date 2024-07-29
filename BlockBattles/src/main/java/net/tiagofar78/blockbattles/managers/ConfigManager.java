@@ -27,6 +27,7 @@ public class ConfigManager {
     private int _finishedSeconds;
     private int _startingHealth;
     private int _startingHandSize;
+    private int _rankedStolenPoints;
     
     private String _defaultLanguage;
     private List<String> _availableLanguages;
@@ -60,6 +61,7 @@ public class ConfigManager {
         _finishedSeconds = config.getInt("FinishedSeconds");
         _startingHealth = config.getInt("StartingHealth");
         _startingHandSize = config.getInt("StartingHandSize");
+        _rankedStolenPoints = config.getInt("RankedStolenPoints");
         
         _defaultLanguage = config.getString("DefaultLanguage");
         _availableLanguages = config.getStringList("AvailableLanguages");
@@ -118,6 +120,10 @@ public class ConfigManager {
     
     public int getStartingHandSize() {
         return _startingHandSize;
+    }
+    
+    public int getRankedStolenPoints() {
+        return _rankedStolenPoints;
     }
     
     public String getDefaultLanguage() {

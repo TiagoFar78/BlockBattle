@@ -12,6 +12,8 @@ Messages:
     TurnDuration: "&b{PLAYER} &ehas &b{SECONDS} &eseconds to play"
     ResultTitle: "&6{WINNER} WON"
     ResultSubtitle: "&fwith &a{HEALTH} &fhealth remaining"
+    RankedWinnerResultSubtitle: "&a+{POINTS} RR"
+    RankedLoserResultSubtitle: "&c-{POINTS} RR"
     GameResult: "&6{WINNER} &fwon against &f{LOSER}."
   Errors:
     AlreadyInQueue: "&cYou are already in the queue"

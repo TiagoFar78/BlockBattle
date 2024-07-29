@@ -75,6 +75,8 @@ public class MessagesManager {
     private String _turnDurationMessage;
     private String _resultTitle;
     private String _resultSubtitle;
+    private String _rankedWinnerResultSubtitle;
+    private String _rankedLoserResultSubtitle;
     private String _gameResultMessage;
 
 //  ########################################
@@ -108,6 +110,8 @@ public class MessagesManager {
         _turnDurationMessage = createMessage(messages.getString(warningPath + "TurnDuration"));
         _resultTitle = createMessage(messages.getString(warningPath + "ResultTitle"));
         _resultSubtitle = createMessage(messages.getString(warningPath + "ResultSubtitle"));
+        _rankedWinnerResultSubtitle = createMessage(messages.getString(warningPath + "RankedWinnerResultSubtitle"));
+        _rankedLoserResultSubtitle = createMessage(messages.getString(warningPath + "RankedLoserResultSubtitle"));
         _gameResultMessage = createMessage(messages.getString(warningPath + "GameResult"));
         
         String errorPath = "Messages.Errors.";
@@ -196,6 +200,14 @@ public class MessagesManager {
     
     public String getResultSubtitle(double health) {
         return _resultSubtitle.replace("{HEALTH}", Double.toString(health));
+    }
+    
+    public String getRankedWinnerResultSubtitle(int points) {
+        return _rankedWinnerResultSubtitle.replace("{POINTS}", Integer.toString(points));
+    }
+    
+    public String getRankedLoserResultSubtitle(int points) {
+        return _rankedLoserResultSubtitle.replace("{POINTS}", Integer.toString(points));
     }
     
     public String getGameResultMessage(String winnerName, String loserName) {

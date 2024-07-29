@@ -25,11 +25,13 @@ public class QueueCommand implements CommandExecutor {
             return false;
         }
         
-        int returnCode = QueueManager.joinQueue(player);
+        boolean isRanked = args.length > 0 && args[0].equals("-r");
+        
+        int returnCode = isRanked ? QueueManager.joinRankedQueue(player) : QueueManager.joinNormalQueue(player);
         if (returnCode == 0) {
             player.sendMessage(messages.getJoinedQueueMessage());
         }
-        else {
+        else if (returnCode == -1) {
             player.sendMessage(messages.getAlreadyInQueueMessage());
         }
         
