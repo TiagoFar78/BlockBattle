@@ -23,12 +23,6 @@ public abstract class BBPAPIExpansion extends PlaceholderExpansion {
         return BlockBattles.getBlockBattles().getDescription().getVersion();
     }
     
-    @Override
-    public String onRequest(OfflinePlayer player, String identifier) {
-        String className = this.getClass().getSimpleName();
-        return identifier.equalsIgnoreCase(className) ? onRequest(player) : null;
-    }
-    
     public abstract String onRequest(OfflinePlayer player);
 
 }

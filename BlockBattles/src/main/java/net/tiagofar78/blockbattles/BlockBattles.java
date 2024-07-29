@@ -15,9 +15,7 @@ import net.tiagofar78.blockbattles.managers.ConfigManager;
 import net.tiagofar78.blockbattles.managers.GamesManager;
 import net.tiagofar78.blockbattles.managers.MessagesManager;
 import net.tiagofar78.blockbattles.managers.SchematicsManager;
-import net.tiagofar78.blockbattles.placeholders.Losses;
-import net.tiagofar78.blockbattles.placeholders.RatingRanked;
-import net.tiagofar78.blockbattles.placeholders.Wins;
+import net.tiagofar78.blockbattles.placeholders.ExpansionCaller;
 
 public class BlockBattles extends JavaPlugin {
     
@@ -40,9 +38,7 @@ public class BlockBattles extends JavaPlugin {
         GamesManager.generateMaps();
         
         if (pm.isPluginEnabled("PlaceholderAPI")) {
-            new RatingRanked().register();
-            new Losses().register();
-            new Wins().register();
+            new ExpansionCaller().register();
         }
     }
 
