@@ -70,6 +70,7 @@ public class MessagesManager {
     
     private String _joinedQueueMessage;
     private String _leftQueueMessage;
+    private String _mapsLoadedMessage;
     private String _lostTurnOwnMessage;
     private String _lostTurnOtherMessage;
     private String _turnDurationMessage;
@@ -83,6 +84,7 @@ public class MessagesManager {
 //  #                Errors                #
 //  ########################################
     
+    private String _notAllowedMessage;
     private String _alreadyInQueueMessage;
     private String _notInQueueMessage;
     private String _cantExecuteInGameMessage;
@@ -105,6 +107,7 @@ public class MessagesManager {
         String warningPath = "Messages.Warnings.";
         _joinedQueueMessage = createMessage(messages.getString(warningPath + "JoinedQueue"));
         _leftQueueMessage = createMessage(messages.getString(warningPath + "LeftQueue"));
+        _mapsLoadedMessage = createMessage(messages.getString(warningPath + "MapsLoaded"));
         _lostTurnOwnMessage = createMessage(messages.getString(warningPath + "LostTurnOwn"));
         _lostTurnOtherMessage = createMessage(messages.getString(warningPath + "LostTurnOther"));
         _turnDurationMessage = createMessage(messages.getString(warningPath + "TurnDuration"));
@@ -115,6 +118,7 @@ public class MessagesManager {
         _gameResultMessage = createMessage(messages.getString(warningPath + "GameResult"));
         
         String errorPath = "Messages.Errors.";
+        _notAllowedMessage = createMessage(messages.getString(errorPath + "NotAllowed"));
         _alreadyInQueueMessage = createMessage(messages.getString(errorPath + "AlreadyInQueue"));
         _notInQueueMessage = createMessage(messages.getString(errorPath + "NotInQueue"));
         _cantExecuteInGameMessage = createMessage(messages.getString(errorPath + "CantExecuteInGame"));
@@ -182,6 +186,10 @@ public class MessagesManager {
         return _leftQueueMessage;
     }
     
+    public String getMapsLoadedMessage() {
+        return _mapsLoadedMessage;
+    }
+    
     public String getLostTurnOwnMessage() {
         return _lostTurnOwnMessage;
     }
@@ -217,6 +225,10 @@ public class MessagesManager {
 //  ########################################
 //  #                Errors                #
 //  ########################################
+    
+    public String getNotAllowedMessage() {
+        return _notAllowedMessage;
+    }
     
     public String getAlreadyInQueueMessage() {
         return _alreadyInQueueMessage;

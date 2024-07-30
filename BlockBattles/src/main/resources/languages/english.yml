@@ -7,6 +7,7 @@ Messages:
   Warnings:
     JoinedQueue: "&eYou joined the queue"
     LeftQueue: "&eYou left the queue"
+    MapsLoaded: "&aAll maps were loaded"
     LostTurnOwn: "&cYou lost your turn because you took to long to play"
     LostTurnOther: "&b{PLAYER} &etook to long to play. It is now your turn"
     TurnDuration: "&b{PLAYER} &ehas &b{SECONDS} &eseconds to play"
@@ -16,6 +17,7 @@ Messages:
     RankedLoserResultSubtitle: "&c-{POINTS} RR"
     GameResult: "&6{WINNER} &fwon against &f{LOSER}."
   Errors:
+    NotAllowed: "&cYou don't have permission to do that"
     AlreadyInQueue: "&cYou are already in the queue"
     NotInQueue: "&cYou are not in the queue"
     CantExecuteInGame: "&cYou cannot execute this command while in a game."

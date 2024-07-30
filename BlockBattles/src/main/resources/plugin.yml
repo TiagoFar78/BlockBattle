@@ -6,4 +6,5 @@ main: net.tiagofar78.blockbattles.BlockBattles
 commands:
   queue:
   leavequeue:
+  bbloadmaps:
   
