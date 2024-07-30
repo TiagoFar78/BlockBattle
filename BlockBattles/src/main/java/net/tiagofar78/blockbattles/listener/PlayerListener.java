@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import net.tiagofar78.blockbattles.dataobjects.BBGamePlayer;
 import net.tiagofar78.blockbattles.managers.ConfigManager;
 import net.tiagofar78.blockbattles.managers.GamesManager;
+import net.tiagofar78.blockbattles.managers.QueueManager;
 
 public class PlayerListener implements Listener {
     
@@ -55,7 +56,10 @@ public class PlayerListener implements Listener {
     
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e) {
-        BBGamePlayer gameAndPlayer = GamesManager.findGameAndPlayer(e.getPlayer());
+        Player player = e.getPlayer();
+        QueueManager.leaveQueue(player);
+        
+        BBGamePlayer gameAndPlayer = GamesManager.findGameAndPlayer(player);
         if (gameAndPlayer != null) {
             gameAndPlayer.getGame().playerLeft(gameAndPlayer.getPlayer());
         }
