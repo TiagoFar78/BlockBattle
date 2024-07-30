@@ -5,6 +5,7 @@ author: TiagoFar78
 main: net.tiagofar78.blockbattles.BlockBattles
 commands:
   queue:
+  rqueue:
   leavequeue:
   bbloadmaps:
   

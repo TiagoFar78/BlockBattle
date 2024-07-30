@@ -10,6 +10,12 @@ import net.tiagofar78.blockbattles.managers.MessagesManager;
 import net.tiagofar78.blockbattles.managers.QueueManager;
 
 public class QueueCommand implements CommandExecutor {
+    
+    private boolean _isRanked;
+    
+    public QueueCommand(boolean isRanked) {
+        _isRanked = isRanked;
+    }
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -25,9 +31,7 @@ public class QueueCommand implements CommandExecutor {
             return false;
         }
         
-        boolean isRanked = args.length > 0 && args[0].equals("-r");
-        
-        int returnCode = isRanked ? QueueManager.joinRankedQueue(player) : QueueManager.joinNormalQueue(player);
+        int returnCode = _isRanked ? QueueManager.joinRankedQueue(player) : QueueManager.joinNormalQueue(player);
         if (returnCode == 0) {
             player.sendMessage(messages.getJoinedQueueMessage());
         }

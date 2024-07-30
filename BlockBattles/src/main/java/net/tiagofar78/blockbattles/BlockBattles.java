@@ -27,7 +27,8 @@ public class BlockBattles extends JavaPlugin {
             saveDefaultConfig();
         }
         
-        getCommand("queue").setExecutor(new QueueCommand());
+        getCommand("queue").setExecutor(new QueueCommand(false));
+        getCommand("rqueue").setExecutor(new QueueCommand(true));
         getCommand("leavequeue").setExecutor(new LeaveQueueCommand());
         getCommand("bbloadmaps").setExecutor(new LoadMapsCommand());
         
