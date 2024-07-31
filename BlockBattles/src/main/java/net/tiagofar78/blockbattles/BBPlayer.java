@@ -32,6 +32,7 @@ public class BBPlayer {
     private Player _player;
     private double _health;
     private ScoreboardData _sbData;
+    private List<Block> _rotation;
     private List<Block> _hand;
     private List<Block> _availableCombos;
     
@@ -44,6 +45,7 @@ public class BBPlayer {
         _health = config.getStartingHealth();
         
         _deck = createDummyDeck(); // TODO in the future, right now this is just for testing
+        _rotation = initializeRotation();
         _hand = initializeHand();
     }
     
@@ -91,26 +93,39 @@ public class BBPlayer {
 //  #               Inventory               #
 //  #########################################
     
-    private List<Block> initializeHand() {
-        int handSize = ConfigManager.getInstance().getStartingHandSize();
-        int n = _deck.size();
+    private List<Block> initializeRotation() {
         Random random = new Random();
         
-        List<Block> inventory = new ArrayList<>();
-        for (int i = 0; i < handSize; i++) {
-            inventory.add(_deck.get(random.nextInt(n)));
+        int n = _deck.size();
+        List<Block> rotation = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int randomIndex = random.nextInt(_deck.size());
+            rotation.add(_deck.get(randomIndex));
+            _deck.remove(randomIndex);
         }
         
-        return inventory;
+        return rotation;
+    }
+    
+    private List<Block> initializeHand() {
+        int handSize = ConfigManager.getInstance().getStartingHandSize();
+        List<Block> hand = new ArrayList<>();
+        
+        for (int i = 0; i < handSize; i++) {
+            hand.add(_rotation.get(0));
+            _rotation.remove(0);
+        }
+        
+        return hand;
     }
     
     public void usedItemAt(int slot) {
-        int invIndex = toHandIndex(slot);
+        int handIndex = toHandIndex(slot);
         
-        int randomIndex = new Random().nextInt(_deck.size());
-        Block randomBlock = _deck.get(randomIndex).createNewInstance();
+        _rotation.add(_hand.get(handIndex).createNewInstance());
         
-        _hand.set(invIndex, randomBlock);
+        _hand.set(handIndex, _rotation.get(0));
+        _rotation.remove(0);
         updateInventory();
     }
     
