@@ -35,6 +35,9 @@ Locations:
     Y: 0
     Z: 0
 Items:
+  JackOLanter:
+    DamageDay: 2
+    DamageNight: 5
   Chest:
     Damage: 5
   OakDoor:

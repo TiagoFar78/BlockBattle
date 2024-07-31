@@ -39,6 +39,8 @@ public class ConfigManager {
     private Location _player2SpawnPoint;
     private Location _exitLocation;
     
+    private double _jackOLanternDamageDay;
+    private double _jackOLanternDamageNight;
     private double _chestDamage;
     private double _oakDoorDamage;
     private int _oakDoorMaxInteractions;
@@ -77,6 +79,8 @@ public class ConfigManager {
         _exitLocation = createLocation(exitWorld, config, locationsPath + "Exit");
         
         String itemsPath = "Items.";
+        _jackOLanternDamageDay = config.getDouble(itemsPath + "JackOLantern.DamageDay");
+        _jackOLanternDamageNight = config.getDouble(itemsPath + "JackOLantern.DamageNight");
         _chestDamage = config.getDouble(itemsPath + "Chest.Damage");
         _oakDoorDamage = config.getDouble(itemsPath + "OakDoor.Damage");
         _oakDoorMaxInteractions = config.getInt(itemsPath + "OakDoor.MaxInteractions");
@@ -156,6 +160,14 @@ public class ConfigManager {
     
     public Location getExitLocation() {
         return createLocationCopy(_exitLocation);
+    }
+    
+    public double getJackOLanternDamageDay() {
+        return _jackOLanternDamageDay;
+    }
+    
+    public double getJackOLanternDamageNight() {
+        return _jackOLanternDamageNight;
     }
     
     public double getChestDamage() {

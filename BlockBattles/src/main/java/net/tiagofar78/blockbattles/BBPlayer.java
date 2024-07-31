@@ -10,6 +10,7 @@ import org.bukkit.inventory.Inventory;
 import net.tiagofar78.blockbattles.block.Block;
 import net.tiagofar78.blockbattles.block.ChestBlock;
 import net.tiagofar78.blockbattles.block.FlowerPotBlock;
+import net.tiagofar78.blockbattles.block.JackOLanternBlock;
 import net.tiagofar78.blockbattles.block.OakDoorBlock;
 import net.tiagofar78.blockbattles.block.OakFenceGateBlock;
 import net.tiagofar78.blockbattles.block.OakTrapdoorBlock;
@@ -209,6 +210,7 @@ public class BBPlayer {
         deck.add(new FlowerPotBlock());
         deck.add(new PointedDripstoneBlock());
         deck.add(new WaxedExposedCutCopperStairsBlock());
+        deck.add(new JackOLanternBlock());
         
         return deck;
     }

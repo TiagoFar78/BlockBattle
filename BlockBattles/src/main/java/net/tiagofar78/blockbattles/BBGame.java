@@ -36,6 +36,7 @@ public class BBGame {
     private Board _board;
     private BBPlayer _player1;
     private BBPlayer _player2;
+    private DayPeriod _dayPeriod;
     
     private Phase _phase;
     
@@ -46,6 +47,7 @@ public class BBGame {
         _player1 = new BBPlayer(player1, this);
         _player2 = new BBPlayer(player2, this);
         _board = new Board();
+        _dayPeriod = DayPeriod.DAY;
         
         ConfigManager config = ConfigManager.getInstance();
         
@@ -79,6 +81,10 @@ public class BBGame {
     
     public Board getBoard() {
         return _board;
+    }
+    
+    public DayPeriod getDayPeriod() {
+        return _dayPeriod;
     }
     
     private void adapLocation(Location location) {
