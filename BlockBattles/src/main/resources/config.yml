@@ -60,3 +60,5 @@ Items:
     Damage: 6
   WaxedExposedCutCopperStairs:
     Damage: 5
+  DayLightDetector:
+    Damage: 3

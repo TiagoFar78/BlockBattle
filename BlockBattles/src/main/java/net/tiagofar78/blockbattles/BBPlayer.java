@@ -38,6 +38,8 @@ public class BBPlayer {
     
     private List<Block> _deck;
     
+    private double _damageTakenFromDayPeriodChange = 0;
+    
     public BBPlayer(Player player, BBGame game) {
         ConfigManager config = ConfigManager.getInstance();
         
@@ -71,6 +73,18 @@ public class BBPlayer {
     public void kill() {
         _health = 0;
     }
+    
+    public void dayPeriodChanged() {
+        damage(_damageTakenFromDayPeriodChange);
+    }
+    
+    public void registerDamageFromDayPeriod(double damage) {
+        _damageTakenFromDayPeriodChange += damage;
+    }
+
+//  #########################################
+//  #                 Combo                 #
+//  #########################################
     
     public List<Block> getAvailableCombos() {
         return _availableCombos;

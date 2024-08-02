@@ -87,6 +87,15 @@ public class BBGame {
         return _dayPeriod;
     }
     
+    public void changeDayPeriod(DayPeriod dayPeriod) {
+        if (_dayPeriod != dayPeriod) {
+            _player1.dayPeriodChanged();
+            _player2.dayPeriodChanged();
+        }
+        
+        _dayPeriod = dayPeriod;
+    }
+    
     private void adapLocation(Location location) {
         location.subtract(_referenceLoc);
     }
