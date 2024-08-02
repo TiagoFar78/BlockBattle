@@ -9,6 +9,7 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
 import net.tiagofar78.blockbattles.managers.ConfigManager;
@@ -58,6 +59,11 @@ public class WorldListener implements Listener {
     
     @EventHandler
     public void onDropItem(PlayerDropItemEvent e) {
+        e.setCancelled(isOnBBWorld(e.getPlayer().getWorld().getName()));
+    }
+    
+    @EventHandler
+    public void onSwapHandItems(PlayerSwapHandItemsEvent e) {
         e.setCancelled(isOnBBWorld(e.getPlayer().getWorld().getName()));
     }
     
